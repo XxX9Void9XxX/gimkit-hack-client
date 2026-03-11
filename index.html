@@ -1,41 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gimkit Hack Client</title>
+    <title>Gimkit Hack Client v2.0</title>
     <style>
-        body { font-family: Arial; background: #1a1a1a; color: white; padding: 20px; }
-        .hack-container { max-width: 600px; margin: 0 auto; }
-        button { background: #ff4444; color: white; border: none; padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px; }
-        button.active { background: #44ff44; }
-        .status { background: #333; padding: 10px; margin: 10px 0; border-radius: 5px; }
-        input { background: #333; color: white; border: 1px solid #555; padding: 8px; margin: 5px; border-radius: 3px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: linear-gradient(135deg, #0c0c0c, #1a1a1a); 
+            color: #fff; 
+            min-height: 100vh; 
+            padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .game-input { 
+            background: rgba(0,0,0,0.5); 
+            border: 2px solid #444; 
+            border-radius: 12px; 
+            padding: 20px; 
+            margin-bottom: 20px;
+        }
+        input[type="text"] { 
+            width: 100%; 
+            background: #222; 
+            border: 2px solid #666; 
+            color: white; 
+            padding: 12px; 
+            font-size: 18px; 
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .join-btn { 
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e); 
+            border: none; 
+            color: white; 
+            padding: 15px 30px; 
+            font-size: 18px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .join-btn:hover { transform: scale(1.05); }
+        .hack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+        .hack-btn { 
+            background: #333; 
+            border: 2px solid #555; 
+            color: white; 
+            padding: 12px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            transition: all 0.2s;
+            font-weight: bold;
+        }
+        .hack-btn.active { background: #00ff88; border-color: #00cc66; transform: scale(1.02); }
+        .hack-btn.danger { background: #ff4444; border-color: #cc3333; }
+        #log { 
+            background: #000; 
+            border: 1px solid #333; 
+            border-radius: 8px; 
+            padding: 15px; 
+            height: 200px; 
+            overflow-y: auto; 
+            font-family: monospace; 
+            font-size: 12px; 
+            margin-top: 20px;
+        }
+        .status { padding: 10px; border-radius: 8px; margin: 10px 0; font-weight: bold; }
+        .status.connected { background: #00ff88; }
+        .status.disconnected { background: #ff4444; }
     </style>
 </head>
 <body>
-    <div class="hack-container">
-        <h1>🚀 Gimkit Hack Client</h1>
-        <div id="status" class="status">Status: Ready</div>
+    <div class="container">
+        <h1>🎮 Gimkit Hack Client v2.0</h1>
         
-        <h3>💰 Money Hacks</h3>
-        <button onclick="toggleMoneyHack()">Infinite Money</button>
-        <button onclick="setMoney(999999)">Set $999,999</button>
+        <div class="game-input">
+            <input type="text" id="gameCode" placeholder="Enter Gimkit Game Code (e.g. ABC123)" maxlength="6">
+            <button class="join-btn" onclick="joinGame()">🚀 Join Game + Inject Hacks</button>
+        </div>
         
-        <h3>⚡ Player Hacks</h3>
-        <button onclick="toggleSpeedHack()">Super Speed</button>
-        <button onclick="toggleJumpHack()">Super Jump</button>
-        <button onclick="godModeToggle()">God Mode</button>
+        <div id="status" class="status disconnected">Status: Enter game code and join</div>
         
-        <h3>🤖 Answer Bot</h3>
-        <button onclick="toggleAnswerBot()">Auto Answer</button>
-        <input id="answerDelay" type="number" value="100" placeholder="Delay (ms)">
+        <div class="hack-grid" id="hackGrid" style="display: none;">
+            <button class="hack-btn" onclick="toggleHack('money')">💰 Infinite Money</button>
+            <button class="hack-btn" onclick="toggleHack('speed')">⚡ Super Speed x10</button>
+            <button class="hack-btn" onclick="toggleHack('jump')">🦘 Super Jump</button>
+            <button class="hack-btn" onclick="toggleHack('god')">🛡️ God Mode</button>
+            <button class="hack-btn" onclick="toggleHack('answers')">🤖 Auto Answer</button>
+            <button class="hack-btn danger" onclick="toggleHack('all')">🎯 Toggle All</button>
+            <button class="hack-btn" onclick="maxPowerups()">⭐ Max Powerups</button>
+            <button class="hack-btn" onclick="unlockStore()">🛒 Unlock Store</button>
+        </div>
         
-        <h3>🎯 Powerups</h3>
-        <button onclick="maxPowerups()">Max All Powerups</button>
-        <button onclick="toggleAllHacks()">Toggle All</button>
+        <div id="log"></div>
         
-        <div id="log" style="margin-top: 20px; height: 200px; overflow-y: scroll; background: #000; padding: 10px; border-radius: 5px; font-size: 12px;"></div>
+        <div style="margin-top: 30px; font-size: 12px; opacity: 0.7;">
+            <p>📝 Instructions: Join game → hacks appear → enable what you want. Fully undetectable client-side injection.</p>
+        </div>
     </div>
 
+    <script src="injector.js"></script>
     <script src="hack.js"></script>
 </body>
 </html>
