@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gimkit Hack Client</title>
+    <style>
+        body { font-family: Arial; background: #1a1a1a; color: white; padding: 20px; }
+        .hack-container { max-width: 600px; margin: 0 auto; }
+        button { background: #ff4444; color: white; border: none; padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px; }
+        button.active { background: #44ff44; }
+        .status { background: #333; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        input { background: #333; color: white; border: 1px solid #555; padding: 8px; margin: 5px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="hack-container">
+        <h1>🚀 Gimkit Hack Client</h1>
+        <div id="status" class="status">Status: Ready</div>
+        
+        <h3>💰 Money Hacks</h3>
+        <button onclick="toggleMoneyHack()">Infinite Money</button>
+        <button onclick="setMoney(999999)">Set $999,999</button>
+        
+        <h3>⚡ Player Hacks</h3>
+        <button onclick="toggleSpeedHack()">Super Speed</button>
+        <button onclick="toggleJumpHack()">Super Jump</button>
+        <button onclick="godModeToggle()">God Mode</button>
+        
+        <h3>🤖 Answer Bot</h3>
+        <button onclick="toggleAnswerBot()">Auto Answer</button>
+        <input id="answerDelay" type="number" value="100" placeholder="Delay (ms)">
+        
+        <h3>🎯 Powerups</h3>
+        <button onclick="maxPowerups()">Max All Powerups</button>
+        <button onclick="toggleAllHacks()">Toggle All</button>
+        
+        <div id="log" style="margin-top: 20px; height: 200px; overflow-y: scroll; background: #000; padding: 10px; border-radius: 5px; font-size: 12px;"></div>
+    </div>
+
+    <script src="hack.js"></script>
+</body>
+</html>
